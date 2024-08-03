@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Where in the world, A website the provides informations about a country such as: name of the country, population, speaking languages, currencies... .
+       It contains all countries in the world.  "
+    />
+    <meta name="author" content="Ammar Matar" />
+
+    <title>Where in the world</title>
+
+    <link rel="icon" href="./icons/favicon-icon-192.png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Where in the world?</h1>
+      <button class="dark-mode-button" name="Toggle dark mode">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="dark-mode-icon"
+          width="18"
+          height="18"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+          />
+        </svg>
+        <span class="dark-mode-text">Dark Mode</span>
+      </button>
+    </header>
+
+    <div class="main-page padding-horizontally">
+      <div class="nav-container">
+        <form class="nav-element navigation">
+          <div class="search-bar">
+            <div class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="hsl(0, 0%, 46%)"
+                class="icon"
+                width="24"
+                height="24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </div>
+            <input type="search" placeholder="Search for a country..." class="search-input" />
+          </div>
+
+          <div class="region-selector">
+            <p class="filter">Filter by Region</p>
+            <div class="region-filter-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="icon icon-arrow"
+                width="18"
+                height="18"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <ul class="region-options-container">
+              <li class="region-options">
+                <button class="region-options-btn" data-region="All" name="All countries">
+                  All Countries
+                </button>
+              </li>
+              <li class="region-options">
+                <button class="region-options-btn" data-region="Africa" name="Africa continent">
+                  Africa
+                </button>
+              </li>
+              <li class="region-options">
+                <button class="region-options-btn" data-region="Americas" name="America continent">
+                  America
+                </button>
+              </li>
+              <li class="region-options">
+                <button class="region-options-btn" data-region="Asia" name="Asia continent">
+                  Asia
+                </button>
+              </li>
+              <li class="region-options">
+                <button class="region-options-btn" data-region="Europe" name="Europe continent">
+                  Europe
+                </button>
+              </li>
+              <li class="region-options">
+                <button class="region-options-btn" data-region="Oceania" name="Oceania countries">
+                  Oceania
+                </button>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div class="error hidden-opacity">
+        <p>No country found with "<span class="error-text"></span>"</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="#ff0000"
+          class="size-6"
+          width="200"
+          height="200"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+          />
+        </svg>
+      </div>
+      <main></main>
+    </div>
+
+    <div class="padding-horizontally">
+      <button class="back-btn hidden" name="Back">
+        <span class="left-arrow--icon">&larr;</span>
+        <span class="back-paragraph">Back</span>
+      </button>
+    </div>
+
+    <div class="details-section-container">
+      <section class="details-section padding-horizontally hidden">
+        <img class="big-country-image" alt="Country flag" />
+        <article class="info-section">
+          <div>
+            <h2 data-info-name="name">Jordan</h2>
+          </div>
+          <div class="details-text-box">
+            <div>
+              <div class="info-headers">
+                <p class="sub-headers">Native Name:</p>
+                <span data-info-name-native="native-name"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Population:</p>
+                <span data-info-population="population"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Region:</p>
+                <span data-info-region="region"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Sub Region:</p>
+                <span data-info-sub-region="sub-region"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Capital:</p>
+                <span data-info-capital="capital"></span>
+              </div>
+            </div>
+
+            <div>
+              <div class="info-headers">
+                <p class="sub-headers">Top Level Domain:</p>
+                <span data-info-tld="top-level-domain"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Currencies:</p>
+                <span data-info-cur="currencies"></span>
+              </div>
+              <div class="info-headers">
+                <p class="sub-headers">Languages:</p>
+                <span data-info-lng="languages"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-element-container">
+            <h3>Border Countries:</h3>
+            <div class="neighbour-countries-container"></div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
