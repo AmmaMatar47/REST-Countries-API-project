@@ -24,6 +24,8 @@
     --Very-Dark-Blue--Light-Mode-Text: hsl(0, 0%, 90%);
     --shadow-light-dark: rgba(45, 45, 45, 0.15);
   }
+
+  --transition-darkMode: background-color 0.6s ease-out;
 }
 
 html {
@@ -34,7 +36,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: background-color 0.6s ease-out;
+  transition: var(--transition-darkMode);
 }
 
 body {
@@ -179,6 +181,11 @@ button {
   height: 100%;
   border-radius: 6px;
   padding-left: 1rem;
+  transition: var(--transition-darkMode), box-shadow 0.4s;
+}
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .search-input::-webkit-search-cancel-button {
@@ -217,7 +224,7 @@ button {
 
   left: 0;
   border-radius: 4px;
-  transition: background-color 0.6s ease-out, scale 0.3s ease-in-out;
+  transition: var(--transition-darkMode), scale 0.3s ease-out;
   z-index: 5;
   cursor: auto;
 }
@@ -284,15 +291,17 @@ main {
   background-color: var(--White--Dark-Mode-Text---Light-Mode-Elements);
   overflow: hidden;
   cursor: pointer;
-  transition: scale 0.3s, background-color 0.6s ease-out;
+  transition: var(--transition-darkMode), scale 0.3s;
   max-width: 32rem;
   height: 38rem;
+  text-decoration: none;
 }
 
 .country-image {
   display: block;
   height: 16rem;
   width: 100%;
+  box-shadow: 0 2px 16px var(--shadow-light-dark);
 }
 
 .country-info-container {
@@ -311,6 +320,7 @@ main {
   margin-bottom: 1.4rem;
   font-size: 2.4rem;
   font-weight: 700;
+  color: var(--Very-Dark-Blue--Light-Mode-Text);
 }
 
 .country-info {
@@ -368,6 +378,7 @@ main {
 .big-country-image {
   width: clamp(56rem, 36vw, 76rem);
   max-height: 36rem;
+  box-shadow: 0 8px 16px var(--shadow-light-dark);
 }
 
 div h2 {
@@ -432,13 +443,15 @@ span {
 .borders-btn {
   background-color: var(--White--Dark-Mode-Text---Light-Mode-Elements);
   color: var(--Very-Dark-Blue--Light-Mode-Text);
+  text-decoration: none;
+  text-align: center;
   font-weight: 300;
   font-size: 0.8em;
   width: 10rem;
   padding: 4px 0;
   border-radius: 2px;
   box-shadow: 0 0 6px var(--shadow-light-dark);
-  transition: background-color 0.6s ease-out, transform 0.35s;
+  transition: var(--transition-darkMode), transform 0.35s;
 }
 
 .borders-btn:hover {
@@ -449,6 +462,29 @@ span {
 
 .borders-btn:active {
   transform: translateY(-1px);
+}
+
+/* *********************************************** */
+/* loader */
+/* *********************************************** */
+
+.loader {
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  border: 0.6rem solid var(--hover-background-color);
+  border-top: 0.6rem solid var(--Dark-Gray--Light-Mode-Input);
+  animation: spin 1s infinite linear;
+  margin: 4.8rem auto 0;
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 1turn;
+  }
 }
 
 /* *********************************************** */
