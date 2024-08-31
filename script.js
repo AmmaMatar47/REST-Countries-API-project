@@ -26,11 +26,9 @@ const countryData = async function (type = 'all', typeInput = '', moreInfoPage =
     previewCountrySection.innerHTML = '';
     main.innerHTML = '';
 
-    if (type === 'name' || type === 'alpha/') {
-      !main.querySelector('.loader') && main.insertAdjacentHTML('afterbegin', loaderHTML);
-      !previewCountrySection?.querySelector('.loader') &&
-        previewCountrySection.insertAdjacentHTML('afterbegin', loaderHTML);
-    } else if (!main.querySelector('.loader')) main.insertAdjacentHTML('afterbegin', loaderHTML);
+    !main.querySelector('.loader') && main.insertAdjacentHTML('afterbegin', loaderHTML);
+    !previewCountrySection?.querySelector('.loader') &&
+      previewCountrySection.insertAdjacentHTML('afterbegin', loaderHTML);
 
     errorContainer.classList.add('hidden-opacity');
     const response = await fetch(`https://restcountries.com/v3.1/${type}${typeInput}`);
@@ -39,9 +37,11 @@ const countryData = async function (type = 'all', typeInput = '', moreInfoPage =
       response;
     }
     const countriesData = await response.json();
-    if (moreInfoPage) displayCountryInfo(countriesData[0]);
-    else {
+    if (moreInfoPage) {
+      displayCountryInfo(countriesData[0]);
+    } else {
       main.innerHTML = '';
+      previewCountrySection.innerHTML = '';
       countriesData?.map(country => displayCountry(country));
     }
   } catch (error) {
