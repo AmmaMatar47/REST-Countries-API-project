@@ -268,7 +268,7 @@ button {
 
 .icon-arrow {
   fill: var(--Dark-Gray--Light-Mode-Input);
-  transition: transform 0.4s;
+  transition: transform 0.3s;
 }
 
 .rotate {
@@ -467,6 +467,9 @@ span {
 /* *********************************************** */
 /* loader */
 /* *********************************************** */
+.preview-section {
+  position: relative;
+}
 
 .loader {
   width: 4.8rem;
@@ -475,7 +478,9 @@ span {
   border: 0.6rem solid var(--hover-background-color);
   border-top: 0.6rem solid var(--Dark-Gray--Light-Mode-Input);
   animation: spin 1s infinite linear;
-  margin: 4.8rem auto 0;
+  position: fixed;
+  inset: 50% 0 0 50%;
+  translate: -50% -50%;
 }
 
 @keyframes spin {

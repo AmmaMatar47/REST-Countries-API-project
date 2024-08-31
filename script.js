@@ -20,23 +20,21 @@ const errorText = document.querySelector(`.error-text`);
 ////////////////////////////////////////////////////////////////////
 // FETCH COUNTRIES FUNCTION , FILTERING AND SEARCH
 searchBtn.addEventListener('click', e => e.preventDefault());
-const timeout = delay =>
-  new Promise((resolve, reject) =>
-    setTimeout(() => resolve(new Error('Request timeout try another time :)')), delay * 1000)
-  );
 
 const countryData = async function (type = 'all', typeInput = '', moreInfoPage = false) {
   try {
     previewCountrySection.innerHTML = '';
     main.innerHTML = '';
-    if (type === '/alpha') previewCountrySection.insertAdjacentHTML('afterbegin', loaderHTML);
-    else if (!main.querySelector('.loader')) main.insertAdjacentHTML('afterbegin', loaderHTML);
+
+    if (type === 'name' || type === 'alpha/') {
+      !main.querySelector('.loader') && main.insertAdjacentHTML('afterbegin', loaderHTML);
+      !previewCountrySection?.querySelector('.loader') &&
+        previewCountrySection.insertAdjacentHTML('afterbegin', loaderHTML);
+    } else if (!main.querySelector('.loader')) main.insertAdjacentHTML('afterbegin', loaderHTML);
 
     errorContainer.classList.add('hidden-opacity');
-    const response = await Promise.race([
-      fetch(`https://restcountries.com/v3.1/${type}${typeInput}`),
-      timeout(10),
-    ]);
+    const response = await fetch(`https://restcountries.com/v3.1/${type}${typeInput}`);
+
     if (response) {
       response;
     }
@@ -96,14 +94,15 @@ search.addEventListener('input', e => {
 /////////////////////////////////////////////////////////////////
 // Country details Information
 const displayCountryInfo = country => {
-  const allLanguages = Object.values(country.languages);
+  let allLanguages = Object.values(country.languages);
+  if (allLanguages.length > 6) allLanguages = allLanguages.splice(0, 6).join(',') + ' ...';
+
   const allCurrencies = country.currencies
     ? Object.values(country.currencies).map(currency => Object.values(currency)[0])
     : 'No Currencies';
   const nativeName = Object.values(country.name.nativeName)[0].common;
 
   mainPage.classList.add('hidden');
-
   let bordersCountries = '';
   const previewCountryHTML = `<div class="padding-horizontally">
       <button class="back-btn " name="Back">
@@ -119,44 +118,44 @@ const displayCountryInfo = country => {
   }" />
         <article class="info-section">
           <div>
-            <h2 data-info-name="name">${country.name.common}</h2>
+            <h2>${country.name.common}</h2>
           </div>
           <div class="details-text-box">
             <div>
               <div class="info-headers">
                 <p class="sub-headers">Native Name:</p>
-                <span data-info-name-native="native-name">${nativeName}</span>
+                <span>${nativeName}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Population:</p>
-                <span data-info-population="population">${country.population.toLocaleString()}</span>
+                <span>${country.population.toLocaleString()}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Region:</p>
-                <span data-info-region="region">${country.region}</span>
+                <span>${country.region}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Sub Region:</p>
-                <span data-info-sub-region="sub-region">${country.subregion}</span>
+                <span>${country.subregion}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Capital:</p>
-                <span data-info-capital="capital">${country.capital}</span>
+                <span>${country.capital}</span>
               </div>
             </div>
 
             <div>
               <div class="info-headers">
                 <p class="sub-headers">Top Level Domain:</p>
-                <span data-info-tld="top-level-domain">${country.tld[0]}</span>
+                <span>${country.tld}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Currencies:</p>
-                <span data-info-cur="currencies">${allCurrencies}</span>
+                <span>${allCurrencies}</span>
               </div>
               <div class="info-headers">
                 <p class="sub-headers">Languages:</p>
-                <span data-info-lng="languages">${allLanguages}</span>
+                <span>${allLanguages}</span>
               </div>
             </div>
           </div>
