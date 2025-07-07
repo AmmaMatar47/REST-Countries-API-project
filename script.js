@@ -17,6 +17,8 @@ const sectionCountry = document.querySelector('.details-section');
 const previewCountrySection = document.querySelector('.preview-section');
 const errorContainer = document.querySelector(`.error`);
 const errorText = document.querySelector(`.error-text`);
+
+const fields = 'name,capital,population,region,subregion,languages,flags,currencies,tld,borders';
 ////////////////////////////////////////////////////////////////////
 // FETCH COUNTRIES FUNCTION , FILTERING AND SEARCH
 searchBtn.addEventListener('click', e => e.preventDefault());
@@ -31,7 +33,11 @@ const countryData = async function (type = 'all', typeInput = '', moreInfoPage =
       previewCountrySection.insertAdjacentHTML('afterbegin', loaderHTML);
 
     errorContainer.classList.add('hidden-opacity');
-    const response = await fetch(`https://restcountries.com/v3.1/${type}${typeInput}`);
+    const response = await fetch(
+      `https://restcountries.com/v3.1/${type}${typeInput}${
+        type === 'all' ? `?status=true&fields=${fields}` : ''
+      } `
+    );
 
     if (response) {
       response;
